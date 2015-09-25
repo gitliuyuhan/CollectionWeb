@@ -1,0 +1,147 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+	body{
+		background-color: #09C;
+                          overflow-x: hidden;
+                          overflow-y: hidden;
+	}
+	h2{
+		color: white;
+		text-align: center;
+		vertical-align: middle;
+                         margin-top: 5px;
+	}
+	#til{
+		position: absolute;
+		top: 0px;
+		bottom: 0px;
+		margin: auto;
+		left: 0px;
+		right: 0px;
+                          width: 300px;
+                          height: 40px;
+	}
+	#user{
+		float: left;
+                          width: 300px;
+                          height: 50px;
+
+                          position: absolute;
+                          top: 0px;
+                          bottom: 0px;
+                          margin: auto;
+	}
+             #uimg{
+             	width: 48px;
+             	height: 48px;
+             	float: left;
+             }
+             #ur{
+             	display: inline-block;
+             	font-size: 30px;
+             	color: white;
+             	margin-top: 10px;
+             	margin-left: 15px;
+                         float: left;
+             }
+             #srch{
+             	float: right;
+             	/*display: inline-block;*/
+                         /*margin-top: 15px;*/
+
+
+                          width: 220px;
+                          height: 50px;
+                         position: absolute;
+                         top: 0px;
+                         bottom: 0px;
+                         margin: auto;
+                         right: 0px;
+
+             }
+             #srch form{
+                        margin-top: 15px;
+             }
+             #srch  img{
+                         vertical-align: middle;
+                         border: 0;
+             }
+             #sub{
+                         border: 0;
+                         background-color: #09C;
+                         color: white;
+             }
+             #simg{
+             	width: 18px;
+             	height: 18px;
+             }
+             #user:hover   #mm{
+                         display: block;
+             }
+             #mm{
+                         position: absolute;
+                         left: 120px;
+                         top: 15px;
+             }
+             #mm  li   a{
+                         background-color: #6495ED;
+             }
+             #user  ul{
+                        display: none;
+                        float: left;
+                        margin-left: 200px;
+                        height: 25px;
+                        margin-top: 0px;
+                        width: 150px;
+                        margin: 0;
+                        padding: 0;
+                        
+             }
+             #user  ul   li{
+                         display: inline;
+                         margin-left: 10px;
+                         float: left;
+             }
+             #user  ul   li   a{
+                         color: white;
+                         font-size: 20px;
+                         text-decoration: none; 
+                         display: block;
+             }
+	</style>
+</head>
+<body >
+	<div  id="user">
+		<img  id="uimg"  src="./image/user.png"/>
+                         
+		<?php
+		         session_start();
+	                      $user=$_SESSION['name'];
+	                      //echo $user;
+	                      echo "<label  id='ur'>$user</label>";
+		?>
+                          <ul   id="mm">
+                                   <li>
+                                           <a href="#">个人资料</a>
+                                   </li>
+                                   <li>
+                                           <a href="quit.php"    target='_top'>退出</a>
+                                   </li>
+                          </ul>   
+                                    
+             </div>
+             <div   id="til">
+		<h2>好用的收藏夹</h2>
+ 
+             </div>
+             <div  id="srch">
+             	<form  action="search.php" method="post"    target="content">
+    			<input type="text" name="find">
+    		            <img   id="simg"  src="./image/search.png" />
+    		            <input  id="sub"  type="submit" value="搜索" id="ok">
+    	             </form>
+             </div>           
+</body>
+</html>

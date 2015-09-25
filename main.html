@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>好用的收藏夹</title>
+    <style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    ul li{
+        list-style: none;
+    }
+    #header   a{
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+    }
+    #header{
+        position: fixed;
+        background-color: #2E373C;
+        width: 100%;
+        height: 80px;
+        z-index: 99;
+    }
+    #title{
+        width: 70%;
+        float: left;
+        height: 80px;
+    }
+
+    h2{
+        color: white;
+        font-size: 30px;
+        font-family: '微软雅黑';
+        text-align: center;
+        margin-top: 20px;
+        margin-left: 300px;
+
+    }
+    #smalla{
+        float: right;
+        height: 80px;
+    }
+    #sl li{
+        float: left;
+        height: 30px;
+        width: 40px;
+        margin-right: 20px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+
+    }
+    #sl li:hover{
+        background-color: #1B93C7;
+    }
+    #login{
+        float: left;
+    }
+
+    #content{
+    
+        padding-top: 80px;
+     /*   height: 100%;*/
+        width: 100%;
+        height: 1000px;
+        margin-bottom: 0px;
+       /* background-color: #87CEFA;*/
+      /* background-color: #C9C9C9;*/
+     /*   background: url('./bg.jpg')   ;
+        background-attachment:fixed;*/
+
+    }
+    body{
+        /*background: url('./bg.jpg')   ;*/
+        background-attachment:fixed;
+        background:url('./image/bg.png')  ;
+        background-repeat: repeat;
+    /*    background-repeat: repeat-y;*/
+    }
+
+    #content {
+        margin:0 auto;
+    }
+
+    #content   ul li{
+        list-style: none;
+    }
+    #content   ul .ul_li{
+
+        list-style: none;
+        width: 70%;
+       /* background-color: rgba(0,0,0,0.3);*/
+        background-color: #32CD32;
+     /*   background-image: url('lbg1.jpg');
+        background-repeat: repeat;*/
+        height: 110px;
+        /*margin-bottom: 10px;
+        margin-left: 40px;
+        margin-top: 20px;*/
+        margin:20px auto;
+        position: relative;
+    }
+    .ul_li  a{
+        
+        font-weight: bold;
+    }
+    .ul_li .img{
+        width: 80px;
+        height: 80px;
+        margin: 5px;
+        display: block;
+        text-align: center;
+        vertical-align: center;
+    }
+/*
+    .ul_li  .img:hover{
+        width: 100%;
+        height: 100%;
+    }
+*/
+    .user_name{
+        color: #004;
+        font-size: 16px;
+        height: 10px;
+        display: block;
+        text-align: center;
+        vertical-align: center;
+        margin:0px auto;
+    }
+   .left{
+    float: left;
+    margin-right: 10px;
+   }
+   #content   p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+   }
+    </style>
+</head>
+<body >
+
+    <div id="header">
+        <div id="title">
+            <h2>好用的收藏夹</h2>
+        </div>
+        <div id="smalla">
+            <ul id="sl">
+                <li id="login"><a href="./login.html">登录</a></li>
+                <li id="sign"><a href="./apply.html">注册</a></li>
+           </ul>
+        </div>
+      </div>
+    <div id="content">
+                  <ul> 
+        <?php
+             $con = mysql_connect("localhost","root","liuyuhan");
+             if(!$con)
+             {
+                       die('Could not connect: ' . mysql_error());
+             }
+             mysql_query("set names utf8");
+             mysql_select_db("Collection",$con);
+             $result=mysql_query("select WUrl,WTitle,WPreview,WNotes,UName  from WebPages where  Wid>(SELECT MAX(Wid) FROM WebPages) - 20 ");
+             while($row=mysql_fetch_array($result))
+            {
+                $url=$row['WUrl'];
+                $title=$row['WTitle'];
+                $preview=$row['WPreview'];
+                $notes=$row['WNotes'];
+                $user=$row['UName'];
+
+                echo  "<li class=\"ul_li\">
+                               <ul >
+                                       <div class=\"left\">
+                                           <li> <img  class=\"img\"  src=\"$preview\" ></li>
+                                           <li  class=\"special\"> <span class=\"user_name\">$user</span></li>
+                                       </div>
+                                       <li><a href=\"$url\"  target=\"_blank\">$title</a></li>
+                                       <li><p>备注：</p><p>$notes</p></li>
+                               </ul>
+                           </li>";
+            }
+             mysql_close($con);
+        ?>   
+    </ul>
+    </div>
+</body>
+</html>

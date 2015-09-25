@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-color: #E4EAEC;
+         background-repeat: repeat;
+        background-image: url('./image/bg.png');
+    }
+    ul li{
+        list-style: none;
+    }
+    ul .ul_li{
+        list-style: none;
+        width: 70%;
+        background-color: #fff;
+        height: 110px;
+        margin-bottom: 10px;
+        margin-left: 40px;
+        margin-top: 20px;
+        position: relative;
+    }
+    .ul_li .img{
+        width: 80px;
+        height: 80px;
+        margin: 5px;
+        display: block;
+        text-align: center;
+        vertical-align: center;
+    }
+/*
+    .ul_li  .img:hover{
+        width: 100%;
+        height: 100%;
+    }
+*/
+    .user_name{
+        color: #004;
+        font-size: 16px;
+        height: 10px;
+        display: block;
+        text-align: center;
+        vertical-align: center;
+        margin:0px auto;
+    }
+   .left{
+    float: left;
+    margin-right: 10px;
+   }
+   p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+   }
+    #view{
+           background-image: url('./image/divbg.jpg');
+           position: fixed;
+           top: 0px;
+           right: 0px;
+           width: 40%;
+           height: 100%;
+           text-align: center;
+           display: none;
+   }
+   #bigimg{
+           width: 90%;
+           margin-top: 20px;
+   }
+    </style>
+    <script type="text/javascript">
+     function   showimg(Imga)
+      {
+              document.getElementById("view").style.display="block";
+              document.getElementById("bigimg").src=Imga.src;
+      }
+      function   hiddendiv()
+      {
+              document.getElementById("view").style.display="none";
+      }
+    </script>
+</head>
+<body>
+  
+    <div id="content">
+        <ul> 
+        <?php
+             $key=$_POST["find"];
+             $con = mysql_connect("localhost","root","liuyuhan");
+             if(!$con)
+             {
+                       die('Could not connect: ' . mysql_error());
+             }
+             mysql_query("set names utf8");
+             mysql_select_db("Collection",$con);
+             $result=mysql_query("select WTitle,WUrl,WNotes,WPreview,UName from WebPages where WTitle like '%$key%' OR WUrl like '%$key%' OR WNotes like '%$key%'  ");
+             while($row=mysql_fetch_array($result))
+            {
+                $url=$row['WUrl'];
+                $title=$row['WTitle'];
+                $preview=$row['WPreview'];
+                $notes=$row['WNotes'];
+                $user=$row['UName'];
+
+                echo  "<li class=\"ul_li\">
+                               <ul >
+                                       <div class=\"left\">
+                                           <li> <img  class=\"img\"src=\"$preview\"  onmouseover=\"showimg(this);\"  onmouseout=\"hiddendiv()\"></li>
+                                           <li  class=\"special\"> <span class=\"user_name\">$user</span></li>
+                                       </div>
+                                       <li><a href=\"$url\"  target=\"_blank\">$title</a></li>
+                                       <li><p>备注：</p><p>$notes</p></li>
+                               </ul>
+                           </li>";
+            }
+             mysql_close($con);
+        ?>   
+           
+    </div>
+    <div   id="view" >
+            <img  id="bigimg"   src=""/>
+    </div>
+</body>
+</html>

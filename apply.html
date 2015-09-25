@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<?php
+      include  'apply.php';
+?>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+    body{
+             background-image: url('./image/divbg.jpg');
+    }
+    #content{
+    	background-color: #FFFFFF;
+    	margin-top: 200px;
+    	margin-left: auto;
+             margin-right: auto;
+             width:470px;
+             padding-top: 20px;
+            /* height: 200px;*/
+    }
+    .name{
+        margin: 20px;
+    }
+    #ok{
+        margin-left: 45%;
+        margin-bottom: 10px;
+    }
+    #content   form{
+       
+    }
+    </style>
+</head>
+<body bgcolor="#3c3c3c">
+    <div id="content">
+    	<form  action="<?php   echo  htmlspecialchars($_SERVER['PHP_SELF']); ?>"    method="post">
+    		<div class="name">
+    			<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：<input type="text" name="user"></label>
+                                      <?php  echo  $userErr;  ?>
+    		</div>
+                         <div class="name">
+                                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入密码：<input type="password" name="pwd1"></label>
+                                      <?php  echo  $pwd1Err;  ?>
+                         </div>
+                         <div class="name">
+                                      <label>再次输入密码：<input type="password" name="pwd2"></label>
+                                      <?php  echo  $pwd2Err;  ?>
+                         </div>
+    		<div class="name">
+    		            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮箱：<input type="text" name="email"></label>
+                                      <?php  echo  $emailErr;  ?>
+    		</div>
+    		<input type="submit" value="注册" id="ok">
+    	</form>
+    </div>
+</body>
+</html>

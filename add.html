@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+    body{
+        background-color: #E4EAEC;
+    }
+    #content{
+             vertical-align: middle;
+             margin-top: 100px;
+    }
+    #type{
+             width: 300px;
+             height: 40px;
+             text-align: center;
+    }
+    #ok{
+             margin-top: 20px;
+             width: 100px;
+             height: 40px;
+             
+          
+    }
+    </style>
+</head>
+<body>
+    <div id="content">
+             <center>
+    	<form    action="add.php" method="post">
+    		<div class="url">
+    			<label>网址：<textarea  name="url"  rows=5  cols=45></textarea></label>
+    		</div>
+    		<div class="notes">
+    		            <label>备注：<textarea  name="notes"  rows=7  cols=45 ></textarea></label>
+    		</div>
+                         <div>
+                                     <select   id="type"  name="slt" > 
+                                               <option value="none">选择类型</option>
+                                               <option value="blog">博客</option>
+                                               <option value="tool">工具</option>
+                                               <option value="source">资源</option>
+                                               <option value="video">视频</option>
+                                               <option value="doc">文档</option>
+                                               <option value="other">其他</option>
+                                      </select>
+                         </div>
+    		<input type="submit" value="保存" id="ok">
+    	</form>
+    </div>
+</body>
+</html>

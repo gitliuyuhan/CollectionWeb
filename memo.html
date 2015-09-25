@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<?php
+        session_start();
+        $user=$_SESSION['name'];
+?> 
+
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+
+    body{
+             background-image: url('./image/divbg.jpg');
+    }
+
+    #content   li{
+        background: white;
+        list-style: none;
+        margin-top: 40px;
+    }
+    .dimg{
+        width: 128px;
+        display: inline;
+        float: left;
+    }
+    img{
+        width: 128px;
+        height: 128px;
+        display: inline;
+    }
+    .ok{
+       /* float: left;*/
+        text-align: center;
+        height: 30px;
+        /*margin-left: 0px;*/
+        position: relative;
+        margin-bottom: 0px;
+    }
+    ul{
+        width: 70%;
+    }
+    ul   li{
+      background: red;
+    }
+    .dcont{
+        margin-left: 150px;
+        height: 140px;
+    }
+    </style>
+<script type="text/javascript">
+function   clic(k){
+      var  mtime=document.getElementById(k).innerText;
+      window.location.href='memo.php?mtime='+mtime;
+}
+
+/*window.onload=function()
+{
+
+       window.alert("jfjjljl");
+       var   ok=document.getElementsByClassName('ok');
+      for(var i=0;i<ok.length;i++)
+      {
+                ok[i].onclick=function()
+                {
+                      var par=this.parentNode;
+                      
+                      var childs=par.childNodes[1].childNodes;
+                      
+                      var par1=par.parentNode;
+                      par1.removeChild(par);
+
+                       var delurl=childs[3].firstChild;
+                       var wtype="all";
+                       window.location.href='delweb.php?wtype='+wtype+'&delurl='+delurl ;
+                }
+       }
+}*/
+</script>    
+</head>
+<body bgcolor="#3c3c3c">
+    <div id="content">
+        <ul>
+            <?php
+                  $k=0;
+                 $con = mysql_connect("localhost","root","liuyuhan");
+                 mysql_query("set names utf8");
+                 mysql_select_db("Collection",$con);
+                 $result=mysql_query("select  MContent,MTime,MNotes from  Memo where  UName='$user' ");
+                 while($row=mysql_fetch_array($result))
+                {
+                          $k++;
+                          $cont=$row['MContent'];
+                          $s=trim($cont);
+                          $pre=mb_substr($s, 0,30) . '......' ;
+                          $time=$row['MTime'];
+                          $notes=$row['MNotes'];
+                          echo  "
+                              <li>
+    	                                 <div  class=\"dimg\"> 
+                                            <img  src='./image/memo.jpg'  />
+                                      </div> 
+                                      <div  class=\"dcont\">
+                                            <label   id=\"$k\">$time
+                                            </label>
+                                            <p>$pre</p>
+                                            <label>备注：</label><br><p>$notes<p>
+                                      </div>
+                                      <input type=\"button\" value=\"查看/编辑\"  class=\"ok\"  name=\"$k\"  onclick=\"clic($k);\"  />
+                           </li>
+                     ";
+                  }
+                  mysql_close($con);
+           ?>
+        <ul>
+    </div>
+</body>
+</html>
